@@ -56,34 +56,34 @@ MyAgent Docker Modules Containers >
 
 Global Architecture >
 
-![MyAgent Global Architecture](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-architecture.png?raw=true)
+![MyAgent Global Architecture](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-architecture.png?raw=true)
 
 Tools List >
 
-![MyAgent Tools List](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-tools-list.png?raw=true)
+![MyAgent Tools List](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-tools-list.png?raw=true)
 
 
 ## MyAgent Executions
 
 Hotels Search with Weather Report >
 
-![MyAgent Hotels Search with Weather Report](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-search-hotels-with-weather.png?raw=true)
+![MyAgent Hotels Search with Weather Report](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-search-hotels-with-weather.png?raw=true)
 
 AirBnb Accomodation Search >
 
-![MyAgent AirBnB Accomodation Search](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-airbnb-search.png?raw=true)
+![MyAgent AirBnB Accomodation Search](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-airbnb-search.png?raw=true)
 
 Google Search >
-![MyAgent Google Search](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-google-search.png?raw=true)
+![MyAgent Google Search](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-google-search.png?raw=true)
 
 ## Codeset Files
 
 Docker (Compose) Codeset >
 
-![MyAgent Docker (Compose) Codeset](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-docker-codeset.png?raw=true)
+![MyAgent Docker (Compose) Codeset](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-codeset.png?raw=true)
 
 Java Codeset >
 
-![MyAgent Java Codeset](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-docker-codeset.png?raw=true)
+![MyAgent Java Codeset](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-codeset.png?raw=true)
 
 
