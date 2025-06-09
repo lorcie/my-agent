@@ -7,7 +7,6 @@ This project combines **Google Agent Development Kit** Java Application with **M
 
 ## Build Application Docker Images
 
-- Install the Perplexity Sonar API MCP Server Codeset on your platform on your local environment with **npm install** command
 
 - Build the image(s) with command : **docker compose build**
 
@@ -23,7 +22,6 @@ MyAgent Docker Modules Containers >
 
 ![MyAgent Docker Module Containers](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-containers.png?raw=true)
 
-- Open or activate  the (from the json exported version) AutoSearch N8N Workflow** on some N8N platform : either locally either on some VPS either on the cloud platform
 
 ## Stop Application thru My Agent docker modules
 
