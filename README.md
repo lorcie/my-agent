@@ -13,7 +13,7 @@ This project combines **Google Agent Development Kit** Java Application with **M
 
 MyAgent Docker Modules Images >
 
-![MyAgent Docker Images](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-docker-images.png?raw=true)
+![MyAgent Docker Images](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-images.png?raw=true)
 
 ## Start Application thru MyAgent docker modules
 
@@ -21,7 +21,7 @@ MyAgent Docker Modules Images >
 
 MyAgent Docker Modules Containers >
 
-![MyAgent Docker Module Containers](https://github.com/lorcie/my-agent/assets/blob/main/my-agent-docker-module-containers.png?raw=true)
+![MyAgent Docker Module Containers](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-containers.png?raw=true)
 
 - Open or activate  the (from the json exported version) AutoSearch N8N Workflow** on some N8N platform : either locally either on some VPS either on the cloud platform
 
