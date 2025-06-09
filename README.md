@@ -37,19 +37,18 @@ MyAgent Docker Modules Containers >
 
 ## Usage
 
-- open the workflow either thru the associate autosearch public url  either locally on the N8N environment
+On the My Agent ADK Web UI application, you can use the following queries to test various use cases:
 
-- Click on 'Test Workflow' button 
+1. mcp-toolbox(hotel) + weather tool user query >
+please find up to 3 hotels in basel and inform about weather report
 
-- Type in a text query and run a query such as : provide details about Perplexity Sonar API Benefits and click (see workflow execution fallback below)
+2. mcp-server-airbnb user query >
+describe up to 3 AirBnB accomodation at Basel
 
-- Upload an Image file to test image analysis (see workflow execution image file analysis below)
+3. google-search user query >
+what are the best periods to go to Basel?
 
-- Upload an Image file to test image analysis with very high size more than 5 Mb (see workflow execution image file size exceed below)
-
-- After a while, the workflow executes all nodes (Form Submission / Request Router / Check File Size / MCP Search Text/Image Execute Tool) then returns Perplexity Sonar API results
-
-- Type in a text query such as "Financial Services about payment or invoice" to get response about Stripe financial module (see associated worflow execution details below)
+- Click on any item on left hand side of the User Interface to get an Application Map with the Tools/Agents concerned by the interaction, and also details of Request/Response
 
 
 ## MyAgent Development
@@ -84,6 +83,6 @@ Docker (Compose) Codeset >
 
 Java Codeset >
 
-![MyAgent Java Codeset](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-codeset.png?raw=true)
+![MyAgent Java Codeset](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-java-codeset.png?raw=true)
 
 
