@@ -115,6 +115,9 @@ see section "Deploy to Cloud Run"
 
 cd mcp-server-airbnb/
 
+// build the module into dist subdirectory
+npm run build
+
 export SERVICE_NAME='my-agent-abb-app'
 
 export AR_REPO=YOUR_AR_REPO
