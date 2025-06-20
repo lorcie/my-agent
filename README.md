@@ -92,6 +92,7 @@ Java Codeset >
 This requires to deploy separately each of the components
 
 ### Database
+
 Prepare some Database 
 
 Here are instructions for Postgres (example with POSTGRES_15) Database on **Google Cloud SQL**
@@ -105,33 +106,54 @@ gcloud sql instances create toolbox-db \
 --root-password=postgres
 
 ### MCP Toolbox
+
 https://googleapis.github.io/genai-toolbox/how-to/deploy_toolbox/
+
 see section "Deploy to Cloud Run"
 
 ### MCP server AirBnb
+
 cd mcp-server-airbnb/
+
 export SERVICE_NAME='my-agent-abb-app'
+
 export AR_REPO=YOUR_AR_REPO
+
 export GCP_REGION=YOUR_REGION
+
 export GCP_PROJECT=YOUR_PROJECT_ID
+
 gcloud artifacts repositories list
+
 gcloud artifacts repositories create "$AR_REPO" --location="$GCP_REGION" --repository-format=Docker
+
 gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev"
+
 gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME" .
+
 gcloud run deploy "$SERVICE_NAME" --port=8090 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME" --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
 
 
 ### My Agent ADK applivcation
-cd my-agent/
+
+cd my-agent
+
 export SERVICE_NAME='my-agent-app'
+
 export AR_REPO=YOUR_AR_REPO
+
 export GCP_REGION=YOUR_REGION
+
 export GCP_PROJECT=YOUR_PROJECT_ID
+
 gcloud artifacts repositories list
+
 gcloud artifacts repositories create "$AR_REPO" --location="$GCP_REGION" --repository-format=Docker
+
 gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev"
+
 gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME" .
-// add/set 3 environment variables : MCP_PROXY_URL (AirBnb) MCP_TOOLBOX_URL (Database) GOOGLE_API_KEY (Gemini) 
+
 gcloud run deploy "$SERVICE_NAME"  --port=8080 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME"  --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT --set-env-vars=MCP_PROXY_URL=$MCP_PROXY_URL,MCP_TOOLBOX_URL=$MCP_TOOLBOX_URL,GOOGLE_API_KEY=$GOOGLE_API_KEY
 
 
