@@ -66,6 +66,11 @@ Tools List >
 
 ## MyAgent Executions
 
+Hotels Search with Weather Report on Cloud Run >
+
+![MyAgent Hotels Search with Weather Report on Cloud Run](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-cloud-run-execution.png?raw=true)
+
+
 Hotels Search with Weather Report >
 
 ![MyAgent Hotels Search with Weather Report](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-search-hotels-with-weather.png?raw=true)
