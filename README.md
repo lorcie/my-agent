@@ -34,7 +34,7 @@ MyAgent Docker Modules Images >
 
 Start Application thru MyAgent docker modules
 
-- start the My Agent with command : **docker compose up*
+- start the My Agent with command : **docker compose up**
 
 MyAgent Docker Modules Containers >
 
