@@ -1,12 +1,26 @@
 # MyAgent for Devpost Agent Development Kit Hackathon with Google Cloud
 
-## Introduction
+[Google Cloud Run Hosted Project url: https://my-mlb-app-1029043021255.us-central1.run.app](https://my-mlb-app-1029043021255.us-central1.run.app) 
 
-This project combines **Google Agent Development Kit** Java Application with **ModelContextProtocol** servers (Toolbox, AirBnB)  by SSE.
+|           |                                                |
+| --------- | ---------------------------------------------- |
+| Author(s) | [Adrien Chan](https://github.com/lorcie) |
 
+# Table of contents
+1. [Introduction](#introduction)
+2. [Build Application Docker Images with Docker Compose](#build-docker-compose)
+3. [Docker Compose Modules Orchestration/Start/Stop ](#orchestrate-docker-compose)
+4. [Usage](#usage)
+5. [My Agent Development](#my-agent-development)
+6. [My Agent Executions](#my-agent-executions)
+7. [Codeset Files](#codeset-files)
+8. [Application Deploy on Cloud Run](#application-deploy-cloud-run)
 
-## Build Application Docker Images
+## Introduction <a name="introduction"></a>
 
+This project combines **Google Agent Development Kit** Java Application with **ModelContextProtocol** MCP servers (Toolbox, AirBnB) by SSE combined with Google Search and custom Weather Report Tools 
+
+## Build Application Docker Images with Docker Compose <a name="build-docker-compose"></a>
 
 - Build the image(s) with command : **docker compose build**
 
@@ -14,7 +28,7 @@ MyAgent Docker Modules Images >
 
 ![MyAgent Docker Images](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-docker-images.png?raw=true)
 
-## Docker Compose Modules Orchestration/Start/Stop
+## Docker Compose Modules Orchestration/Start/Stop <a name="orchestrate-docker-compose"></a>
 
 ### Start Application Docker Containers
 
@@ -37,7 +51,7 @@ MyAgent Docker Modules Containers >
 
 - remove the pending (ollama) docker modules container id (s) with command  : **docker rm <container_id>**
 
-## Usage
+## Usage <a name="usage"></a>
 
 On the My Agent ADK Web UI application, you can use the following queries to test various use cases:
 
@@ -53,7 +67,7 @@ what are the best periods to go to Basel?
 - Click on any item on left hand side of the User Interface to get an Application Map with the Tools/Agents concerned by the interaction, and also details of Request/Response
 
 
-## MyAgent Development
+## MyAgent Development <a name="my-agent-development"></a>
 
 Global Architecture >
 
@@ -64,7 +78,7 @@ Tools List >
 ![MyAgent Tools List](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-tools-list.png?raw=true)
 
 
-## MyAgent Executions
+## MyAgent Executions <a name="my-agent-executions"></a>
 
 Hotels Search with Weather Report on Cloud Run >
 
@@ -82,7 +96,7 @@ AirBnb Accomodation Search >
 Google Search >
 ![MyAgent Google Search](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-google-search.png?raw=true)
 
-## Codeset Files
+## Codeset Files <a name="codeset-files"></a>
 
 Docker (Compose) Codeset >
 
@@ -92,17 +106,19 @@ Java Codeset >
 
 ![MyAgent Java Codeset](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-java-codeset.png?raw=true)
 
-## Application Deploy on Cloud Run
+## Application Deploy on Cloud Run <a name="application-deploy-cloud-run"></a>
 
-This requires to deploy separately each of the components
+This requires to deploy separately each of the components : Database, McpToolbox, McpAirBnB, MyAgent 
 
-### Database
+Clone the my-agent project Repo
 
-Prepare some Database 
+Then You can apply following Installation/Deployment Instructions for instance on your Google Cloud Shell (CLI)
+
+### Hotels Database
 
 Here are instructions for Postgres (example with POSTGRES_15) Database on **Google Cloud SQL**
 
-gcloud sql instances create toolbox-db \
+gcloud sql instances create my-agent-db \
 --database-version=POSTGRES_15 \
 --cpu=YOUR_CPU_NUMBER \
 --memory=8GiB \
@@ -110,13 +126,101 @@ gcloud sql instances create toolbox-db \
 --edition=ENTERPRISE \
 --root-password=postgres
 
+// create databse toolbox-db on the instance
+
+gcloud sql databases create toolbox-db \
+--instance=my-agent-db
+
+// connect to the datanase server either with tool such as Google Cloud STudio either with CLI
+
+// create the database schema
+
+CREATE TABLE hotels(
+  id            INTEGER NOT NULL PRIMARY KEY,
+  name          VARCHAR NOT NULL,
+  location      VARCHAR NOT NULL,
+  price_tier    VARCHAR NOT NULL,
+  checkin_date  DATE    NOT NULL,
+  checkout_date DATE    NOT NULL,
+  booked        BIT     NOT NULL
+);
+
+// initialize some data
+
+INSERT INTO hotels(id, name, location, price_tier, checkin_date, checkout_date, booked)
+VALUES 
+  (1, 'Hilton Basel', 'Basel', 'Luxury', '2025-06-25', '2025-06-28', B'0'),
+  (2, 'Marriott Zurich', 'Zurich', 'Upscale', '2025-06-24', '2025-06-29', B'0'),
+  (3, 'Hyatt Regency Basel', 'Basel', 'Upper Upscale', '2025-07-02', '2025-07-20', B'0'),
+  (4, 'Radisson Blu Lucerne', 'Lucerne', 'Midscale', '2025-06-24', '2025-07-05', B'0'),
+  (5, 'Best Western Bern', 'Bern', 'Upper Midscale', '2025-06-23', '2025-07-01', B'0'),
+  (6, 'InterContinental Geneva', 'Geneva', 'Luxury', '2025-06-26', '2025-06-28', B'0'),
+  (7, 'Sheraton Zurich', 'Zurich', 'Upper Upscale', '2025-06-27', '2025-07-02', B'0'),
+  (8, 'Holiday Inn Basel', 'Basel', 'Upper Midscale', '2025-06-24', '2025-07-09', B'0'),
+  (9, 'Courtyard Zurich', 'Zurich', 'Upscale', '2025-07-03', '2025-07-13', B'0'),
+  (10, 'Comfort Inn Bern', 'Bern', 'Midscale', '2025-07-04', '2025-07-16', B'0');
+
+
 ### MCP Toolbox
 
-https://googleapis.github.io/genai-toolbox/how-to/deploy_toolbox/
+MCP Toolbox to Cloud Run deployment need to point the Cloud SQL Database.
 
-see section "Deploy to Cloud Run"
+// go in directory mcp-toolbox
+
+cd mcp-toolbox
+
+First, update sources section of tools.yaml file in  to refer your Cloud SQL instance:
+
+  postgresql: # GCP -  CLOUD SQL
+    kind: cloud-sql-postgres
+    project: YOUr_PROJECT_ID
+    region: YOUR_GCP_REGION
+    instance: my-agent-db
+    database: toolbox-db
+    user: postgres
+    password: admin
+
+Then, configure the MCP Toolbox's Cloud Run service account to access both Secret Manager and Cloud SQL. Secret Manager is where we'll store our tools.yaml file because it contains sensitive Cloud SQL credentials.
+
+gcloud services enable run.googleapis.com \
+   cloudbuild.googleapis.com \
+   artifactregistry.googleapis.com \
+   iam.googleapis.com \
+   secretmanager.googleapis.com
+                       
+gcloud iam service-accounts create toolbox-identity
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
+    --role roles/secretmanager.secretAccessor
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
+    --role roles/cloudsql.client
+
+gcloud secrets create tools --data-file=tools.yaml
+
+deploy the Toolbox to Cloud Run , based on the release version of the MCP Toolbox image
+
+export IMAGE=us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:latest
+
+gcloud run deploy mcp-toolbox \
+    --image="$IMAGE" \
+    --service-account=toolbox-identity \
+    --region=$GCP_REGION \
+    --set-secrets "/app/tools.yaml=tools:latest" \
+    --args="--tools-file=/app/tools.yaml" \
+    --address=0.0.0.0 \
+    --port=5000 \
+    --allow-unauthenticated 
+
+Verify that the Toolbox is running by getting the Cloud Run logs:
+
+gcloud run services logs read mcp-toolbox --region $GCP_REGION
 
 ### MCP server AirBnb
+
+// go in mcp-server-airbnb directory
 
 cd mcp-server-airbnb/
 
@@ -142,7 +246,9 @@ gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SE
 gcloud run deploy "$SERVICE_NAME" --port=8090 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME" --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
 
 
-### My Agent ADK applivcation
+### My Agent ADK application
+
+// go in my-agent directory
 
 cd my-agent
 
@@ -161,6 +267,8 @@ gcloud artifacts repositories create "$AR_REPO" --location="$GCP_REGION" --repos
 gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev"
 
 gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME" .
+
+// set correctly the environment variables  MCP_TOOLBOX_URL, MCP_PROXY_URL (AirBnB MCP service), GOOGLE_API_KEY
 
 gcloud run deploy "$SERVICE_NAME"  --port=8080 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME"  --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT --set-env-vars=MCP_PROXY_URL=$MCP_PROXY_URL,MCP_TOOLBOX_URL=$MCP_TOOLBOX_URL,GOOGLE_API_KEY=$GOOGLE_API_KEY
 
