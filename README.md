@@ -1,6 +1,6 @@
 # MyAgent for Devpost Agent Development Kit Hackathon with Google Cloud
 
-[Google Cloud Run Hosted Project url: https://my-mlb-app-1029043021255.us-central1.run.app](https://my-mlb-app-1029043021255.us-central1.run.app) 
+[Google Cloud Run Hosted Project url: https://my-agent-app-1029043021255.us-central1.run.app](https://my-agent-app-1029043021255.us-central1.run.app) 
 
 |           |                                                |
 | --------- | ---------------------------------------------- |
