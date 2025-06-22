@@ -1,39 +1,44 @@
 sources:
-  my-sqlite-source:
-    kind: sqlite
-    database: hotels.db
+  my-pg-source:
+    kind: cloud-sql-postgres
+    project: YOUr_PROJECT_ID
+    region: YOUR_GCP_REGION
+    instance: my-agent-db
+    database: toolbox-db
+    user: postgres
+    password: admin
 tools:
   search-hotels-by-name:
-    kind: sqlite
-    source: my-sqlite-source
+    kind: postgres-sql
+    source: my-pg-source
     description: Search for hotels based on name.
     parameters:
       - name: name
         type: string
         description: The name of the hotel.
-    statement: SELECT * FROM hotels WHERE name like '%' || $1 || '%';
+    statement: SELECT * FROM hotels WHERE name ILIKE '%' || $1 || '%';
   search-hotels-by-location:
-    kind: sqlite
-    source: my-sqlite-source
+    kind: postgres-sql
+    source: my-pg-source
     description: Search for hotels based on location.
     parameters:
       - name: location
         type: string
         description: The location of the hotel.
-    statement: SELECT * FROM hotels WHERE location like '%' || $1 || '%';
+    statement: SELECT * FROM hotels WHERE location ILIKE '%' || $1 || '%';
   book-hotel:
-    kind: sqlite
-    source: my-sqlite-source
+    kind: postgres-sql
+    source: my-pg-source
     description: >-
        Book a hotel by its ID. If the hotel is successfully booked, returns a NULL, raises an error if not.
     parameters:
       - name: hotel_id
         type: string
         description: The ID of the hotel to book.
-    statement: UPDATE hotels SET booked = 1 WHERE id = $1;
+    statement: UPDATE hotels SET booked = B'1' WHERE id = $1;
   update-hotel:
-    kind: sqlite
-    source: my-sqlite-source
+    kind: postgres-sql
+    source: my-pg-source
     description: >-
       Update a hotel's check-in and check-out dates by its ID. Returns a message
       indicating  whether the hotel was successfully updated or not.
@@ -51,14 +56,14 @@ tools:
       UPDATE hotels SET checkin_date = CAST($2 as date), checkout_date = CAST($3
       as date) WHERE id = $1;
   cancel-hotel:
-    kind: sqlite
-    source: my-sqlite-source
+    kind: postgres-sql
+    source: my-pg-source
     description: Cancel a hotel by its ID.
     parameters:
       - name: hotel_id
         type: string
         description: The ID of the hotel to cancel.
-    statement: UPDATE hotels SET booked = 0 WHERE id = $1;
+    statement: UPDATE hotels SET booked = B'0' WHERE id = $1;
 toolsets:
   my-toolset:
     - search-hotels-by-name

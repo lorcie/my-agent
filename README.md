@@ -116,7 +116,9 @@ Then You can apply following Installation/Deployment Instructions for instance o
 
 ### Hotels Database
 
-Here are instructions for Postgres (example with POSTGRES_15) Database on **Google Cloud SQL**
+The hotels database has been initiated using SQL Lite DB tool.
+
+However, Here are instructions for Postgres (example with POSTGRES_15) Database on **Google Cloud SQL**
 
 gcloud sql instances create my-agent-db \
 --database-version=POSTGRES_15 \
@@ -131,7 +133,7 @@ gcloud sql instances create my-agent-db \
 gcloud sql databases create toolbox-db \
 --instance=my-agent-db
 
-// connect to the datanase server either with tool such as Google Cloud STudio either with CLI
+// connect to the datanase server either with tool such as Google Cloud Studio either with CLI
 
 // create the database schema
 
@@ -169,9 +171,10 @@ MCP Toolbox to Cloud Run deployment need to point the Cloud SQL Database.
 
 cd mcp-toolbox
 
-First, update sources section of tools.yaml file in  to refer your Cloud SQL instance:
+First, update sources section of tools.yaml file in  to refer either your Cloud SQL instance (see tools4postgres.yaml), either your SQL Lite Database (tools.yaml):
 
-  postgresql: # GCP -  CLOUD SQL
+sources:
+  my-pg-source:
     kind: cloud-sql-postgres
     project: YOUr_PROJECT_ID
     region: YOUR_GCP_REGION
@@ -180,7 +183,12 @@ First, update sources section of tools.yaml file in  to refer your Cloud SQL ins
     user: postgres
     password: admin
 
-Then, configure the MCP Toolbox's Cloud Run service account to access both Secret Manager and Cloud SQL. Secret Manager is where we'll store our tools.yaml file because it contains sensitive Cloud SQL credentials.
+sources:
+  my-sqlite-source:
+    kind: sqlite
+    database: hotels.db
+
+Then, configure the MCP Toolbox's Cloud Run service account to access both Secret Manager and Cloud SQL. Secret Manager is where we'll store our tools.yaml file because it may contain potential sensitive Cloud SQL credentials. (not required for SQL lite database)
 
 gcloud services enable run.googleapis.com \
    cloudbuild.googleapis.com \
@@ -202,7 +210,7 @@ gcloud secrets create tools --data-file=tools.yaml
 
 deploy the Toolbox to Cloud Run , based on the release version of the MCP Toolbox image
 
-export IMAGE=us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:latest
+export IMAGE=YOUR_REGION-docker.pkg.dev/database-toolbox/toolbox/toolbox:latest
 
 gcloud run deploy mcp-toolbox \
     --image="$IMAGE" \
