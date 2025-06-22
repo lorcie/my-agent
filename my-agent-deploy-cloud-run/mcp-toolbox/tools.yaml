@@ -1,7 +1,7 @@
 sources:
   my-sqlite-source:
     kind: "sqlite"
-    database: "/mnt/my-agent-data-volume/hotels.db"
+    database: "/app/hotels.db"
 tools:
   search-hotels-by-name:
     kind: sqlite-sql

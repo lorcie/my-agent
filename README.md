@@ -82,7 +82,7 @@ Tools List >
 
 Hotels Search with Weather Report on Cloud Run >
 
-![MyAgent Hotels Search with Weather Report on Cloud Run](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-cloud-run-execution.png?raw=true)
+![MyAgent Hotels Search with Tools on Cloud Run](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-cloud-run-with-tools-execution.png?raw=true)
 
 
 Hotels Search with Weather Report >
@@ -122,6 +122,8 @@ Then You can apply following Installation/Deployment Instructions for instance o
 
 The hotels database has been initiated using SQL Lite DB tool.
 
+#### Postgres Instructions with Google Cloud SQL
+
 However, Here are instructions for Postgres (example with POSTGRES_15) Database on **Google Cloud SQL**
 
 gcloud sql instances create my-agent-db \
@@ -138,6 +140,12 @@ gcloud sql databases create toolbox-db \
 --instance=my-agent-db
 
 // connect to the datanase server either with tool such as Google Cloud Studio either with CLI
+
+#### SQL Lite Instructions
+
+// Install the SQL lite tool depending on your OS
+
+// connect to the datanase server SQL Lite Tool and save to hotels.db
 
 // create the database schema
 
@@ -169,42 +177,40 @@ VALUES
 
 ### MCP Toolbox
 
-MCP Toolbox to Cloud Run deployment need to point the Cloud SQL Database.
-
 // go in directory mcp-toolbox
 
 cd mcp-toolbox
 
-First, update sources section of tools.yaml file in  to refer either your Cloud SQL instance (see tools4postgres.yaml), either your SQL Lite Database (tools.yaml):
+#### SQL Lite Instructions
 
-sources:
-  my-pg-source:
-    kind: cloud-sql-postgres
-    project: YOUr_PROJECT_ID
-    region: YOUR_GCP_REGION
-    instance: my-agent-db
-    database: toolbox-db
-    user: postgres
-    password: admin
+It will use the Dockerfile
 
-sources:
-  my-sqlite-source:
-    kind: sqlite
-    database: hotels.db
+export SERVICE_NAME='my-agent-mcp-toolbox'
 
-Then, configure the MCP Toolbox's Cloud Run service account to access both Secret Manager (and Cloud SQL if used). Secret Manager is where we'll store our tools.yaml file because it may contain potential sensitive Cloud SQL credentials. (not required for SQL lite database)
+export AR_REPO=YOUR_AR_REPO
 
-gcloud services enable run.googleapis.com \
-   cloudbuild.googleapis.com \
-   artifactregistry.googleapis.com \
-   iam.googleapis.com \
-   secretmanager.googleapis.com
-                       
-gcloud iam service-accounts create toolbox-identity
+export GCP_REGION=YOUR_REGION
 
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member serviceAccount:toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
-    --role roles/secretmanager.secretAccessor
+export GCP_PROJECT=YOUR_PROJECT_ID
+
+gcloud artifacts repositories list
+
+// if not yet available, create AR_REPO
+gcloud artifacts repositories create "$AR_REPO" --location="$GCP_REGION" --repository-format=Docker
+
+gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev"
+
+// build docker image
+
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME" .
+
+// deploy on Cloud Run
+
+gcloud run deploy "$SERVICE_NAME" --port=5000 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME"  --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT
+
+#### Postgres Instructions with Google Cloud SQL
+
+MCP Toolbox to Cloud Run deployment need to point the Cloud SQL Database.
 
 // only for Cloud SQL
 gcloud projects add-iam-policy-binding $PROJECT_ID \
@@ -248,6 +254,7 @@ export GCP_PROJECT=YOUR_PROJECT_ID
 
 gcloud artifacts repositories list
 
+// if not yet available, create AR_REPO
 gcloud artifacts repositories create "$AR_REPO" --location="$GCP_REGION" --repository-format=Docker
 
 gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev"
