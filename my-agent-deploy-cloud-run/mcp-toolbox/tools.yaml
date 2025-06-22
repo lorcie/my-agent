@@ -1,10 +1,10 @@
 sources:
   my-sqlite-source:
-    kind: sqlite
-    database: hotels.db
+    kind: "sqlite"
+    database: "/mnt/my-agent-data-volume/hotels.db"
 tools:
   search-hotels-by-name:
-    kind: sqlite
+    kind: sqlite-sql
     source: my-sqlite-source
     description: Search for hotels based on name.
     parameters:
@@ -13,7 +13,7 @@ tools:
         description: The name of the hotel.
     statement: SELECT * FROM hotels WHERE name like '%' || $1 || '%';
   search-hotels-by-location:
-    kind: sqlite
+    kind: sqlite-sql
     source: my-sqlite-source
     description: Search for hotels based on location.
     parameters:
@@ -22,7 +22,7 @@ tools:
         description: The location of the hotel.
     statement: SELECT * FROM hotels WHERE location like '%' || $1 || '%';
   book-hotel:
-    kind: sqlite
+    kind: sqlite-sql
     source: my-sqlite-source
     description: >-
        Book a hotel by its ID. If the hotel is successfully booked, returns a NULL, raises an error if not.
@@ -32,7 +32,7 @@ tools:
         description: The ID of the hotel to book.
     statement: UPDATE hotels SET booked = 1 WHERE id = $1;
   update-hotel:
-    kind: sqlite
+    kind: sqlite-sql
     source: my-sqlite-source
     description: >-
       Update a hotel's check-in and check-out dates by its ID. Returns a message
@@ -51,7 +51,7 @@ tools:
       UPDATE hotels SET checkin_date = CAST($2 as date), checkout_date = CAST($3
       as date) WHERE id = $1;
   cancel-hotel:
-    kind: sqlite
+    kind: sqlite-sql
     source: my-sqlite-source
     description: Cancel a hotel by its ID.
     parameters:

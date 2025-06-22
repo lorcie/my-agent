@@ -96,6 +96,8 @@ AirBnb Accomodation Search >
 Google Search >
 ![MyAgent Google Search](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-google-search.png?raw=true)
 
+![MyAgent Vloud Run Services](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-cloud-run-services.png?raw=true)
+
 ## Codeset Files <a name="codeset-files"></a>
 
 Docker (Compose) Codeset >
@@ -188,7 +190,7 @@ sources:
     kind: sqlite
     database: hotels.db
 
-Then, configure the MCP Toolbox's Cloud Run service account to access both Secret Manager and Cloud SQL. Secret Manager is where we'll store our tools.yaml file because it may contain potential sensitive Cloud SQL credentials. (not required for SQL lite database)
+Then, configure the MCP Toolbox's Cloud Run service account to access both Secret Manager (and Cloud SQL if used). Secret Manager is where we'll store our tools.yaml file because it may contain potential sensitive Cloud SQL credentials. (not required for SQL lite database)
 
 gcloud services enable run.googleapis.com \
    cloudbuild.googleapis.com \
@@ -202,6 +204,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member serviceAccount:toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
     --role roles/secretmanager.secretAccessor
 
+// only for Cloud SQL
 gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member serviceAccount:toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
     --role roles/cloudsql.client
@@ -217,10 +220,8 @@ gcloud run deploy mcp-toolbox \
     --service-account=toolbox-identity \
     --region=$GCP_REGION \
     --set-secrets "/app/tools.yaml=tools:latest" \
-    --args="--tools-file=/app/tools.yaml" \
-    --address=0.0.0.0 \
-    --port=5000 \
-    --allow-unauthenticated 
+    --args="--tools-file=/app/tools.yaml","--address=0.0.0.0","--port=8080"
+    --allow-unauthenticated
 
 Verify that the Toolbox is running by getting the Cloud Run logs:
 
