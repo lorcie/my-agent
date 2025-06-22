@@ -80,7 +80,7 @@ Tools List >
 
 ## MyAgent Executions <a name="my-agent-executions"></a>
 
-Hotels Search with Weather Report on Cloud Run >
+Hotels Search with Tools on Cloud Run >
 
 ![MyAgent Hotels Search with Tools on Cloud Run](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-cloud-run-with-tools-execution.png?raw=true)
 
