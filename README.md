@@ -57,7 +57,7 @@ MyAgent Docker Modules Containers >
 On the My Agent ADK Web UI application, you can use the following queries to test various use cases:
 
 1. mcp-toolbox(hotel) + weather tool user query >
-please find up to 3 hotels in basel and inform about weather report
+find some hotel at basel in end of june and display weather report
 
 2. mcp-server-airbnb user query >
 describe up to 3 AirBnB accomodation at Basel
