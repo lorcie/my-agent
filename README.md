@@ -15,6 +15,7 @@
 6. [My Agent Executions](#my-agent-executions)
 7. [Codeset Files](#codeset-files)
 8. [Application Deploy on Cloud Run](#application-deploy-cloud-run)
+9. [Take Away](#take-away)
 
 ## Introduction <a name="introduction"></a>
 
@@ -290,4 +291,11 @@ gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SE
 
 gcloud run deploy "$SERVICE_NAME"  --port=8080 --image="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME"  --allow-unauthenticated --region=$GCP_REGION --platform=managed --project=$GCP_PROJECT --set-env-vars=MCP_PROXY_URL=$MCP_PROXY_URL,MCP_TOOLBOX_URL=$MCP_TOOLBOX_URL,GOOGLE_API_KEY=$GOOGLE_API_KEY
 
+## Take Away <a name="take-away"></a>
+
+**Google ADK (Agent Development Kit)** offers visual and interactive features to develop/debug and showcase Agent(s) by highlighting the tools/request/response for each user query.
+
+It can be combined easily with **MCP servers** (Toolbox for Databases,...) tools to grant AI agents context and standardized interaction with external resources (databases,...) and services
+
+**Google Cloud** technologies such as **Cloud Shell** **Cloud Run** **Cloud Logging** **Cloud Container Registry** serverless (pay per use) enables developers to deploy/manage/monitor easily application(s)/components
 
