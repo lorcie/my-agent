@@ -115,13 +115,17 @@ Java Codeset >
 
 ![MyAgent Java Codeset](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-java-codeset.png?raw=true)
 
+Google Cloud Shell Editor/Terminal >
+
+![MyAgent Google Clloud Shell Editor/Terminal](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-google-cloud-shells.png?raw=true)
+
 ## Application Deploy on Cloud Run <a name="application-deploy-cloud-run"></a>
 
 This requires to deploy separately each of the components : Database, McpToolbox, McpAirBnB, MyAgent 
 
 Clone the my-agent project Repo
 
-You have to open a session your **Google Cloud Shell**
+You have to open a session your **Google Cloud Shell** offering Terminal (CLI) or ineractive Editor possibilies.
 
 You can then upload thru your Google Cloud Shell the following subdirectory **my-agent-deploy-cloud-run** which includes 3 subdirectories : mcp-toolbox, mcp-server-airbnb and my-agent
 
