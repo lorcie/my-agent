@@ -23,7 +23,7 @@ This project combines **Google Agent Development Kit** Java Application with **M
 
 Some details about Architecture, Usage and Screenshots (executions, codesets samples) are presented below.
 
-Instructions to Build Docker containers with Docker Compose orchestration and Deployment on Google Cloud Technologies (Cloud Run,..) are described below.
+Instructions to Build Docker containers with Docker Compose orchestration and Deployment on Google Cloud Technologies (Cloud Run, Cloud Container Registry, Cloud SQL, ..) are described below.
 
 ## Build Application Docker Images with Docker Compose <a name="build-docker-compose"></a>
 
@@ -301,5 +301,5 @@ gcloud run deploy "$SERVICE_NAME"  --port=8080 --image="$GCP_REGION-docker.pkg.d
 
 It can be combined easily with **MCP servers** (Toolbox for Databases,...) tools to grant AI agents context and standardized interaction with external resources (databases,...) and services
 
-**Google Cloud** technologies such as **Cloud Shell** **Cloud Run** **Cloud Logging** **Cloud Container Registry** serverless (pay per use) enables developers to deploy/manage/monitor easily application(s)/components
+**Google Cloud** technologies such as **Cloud Shell** **Cloud Run** **Cloud Logging** **Cloud Container Registry** **Cloud SQL** serverless (pay per use) enables developers to deploy/manage/monitor easily application(s)/components
 
