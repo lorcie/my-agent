@@ -19,7 +19,7 @@
 
 ## Introduction <a name="introduction"></a>
 
-This project combines **Google Agent Development Kit** Java Application with **ModelContextProtocol** MCP servers (Toolbox, AirBnB) by SSE combined with Google Search and custom Weather Report Tools, in order to enable users to search for hotels and/or AirBnb assets with weather information.
+This project combines **Google Agent Development Kit** Java Application with **ModelContextProtocol** MCP servers (Toolbox, AirBnB) by SSE combined with Google Search and custom Weather Report Tools, in order to enable users to search for hotels and/or AirBnb accomodation with weather information.
 
 Some details about Architecture, Usage and Screenshots (executions, codesets samples) are presented below.
 
