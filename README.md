@@ -21,6 +21,10 @@
 
 This project combines **Google Agent Development Kit** Java Application with **ModelContextProtocol** MCP servers (Toolbox, AirBnB) by SSE combined with Google Search and custom Weather Report Tools, in order to enable users to search for hotels and/or AirBnb assets with weather information.
 
+Some details about usage and screenshots (executions, codesets) are presented below.
+
+Instructions to Build Docker containers with Docker Compose orchestration and Deployment on Google Cloud Technologies (Cloud Run,..) are described below.
+
 ## Build Application Docker Images with Docker Compose <a name="build-docker-compose"></a>
 
 - Build the image(s) with command : **docker compose build**
