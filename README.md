@@ -121,11 +121,18 @@ This requires to deploy separately each of the components : Database, McpToolbox
 
 Clone the my-agent project Repo
 
-Then You can apply following Installation/Deployment Instructions for instance on your Google Cloud Shell (CLI)
+You have to open a session your **Google Cloud Shell**
+
+You can then upload thru your Google Cloud Shell the following subdirectory **my-agent-deploy-cloud-run** which includes 3 subdirectories : mcp-toolbox, mcp-server-airbnb and my-agent
+
+Now, you have to prepare the Database either from **Sql Lite** for simple usage either thru Google Cloud SQL for remote access and easy management.
+
+Then you have to apply the following Installation/Deployment Instructions from your Google Cloud Shell (CLI) session
+
 
 ### Hotels Database
 
-The hotels database has been initiated using SQL Lite DB tool.
+The hotels database can been initiated using SQL Lite DB tool and saved in hotels.db file
 
 #### Postgres Instructions with Google Cloud SQL
 
@@ -244,7 +251,7 @@ gcloud run services logs read mcp-toolbox --region $GCP_REGION
 
 // go in mcp-server-airbnb directory
 
-cd mcp-server-airbnb/
+cd mcp-server-airbnb
 
 // build the module into dist subdirectory
 npm run build
