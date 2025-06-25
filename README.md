@@ -117,7 +117,7 @@ Java Codeset >
 
 Google Cloud Shell Editor/Terminal >
 
-![MyAgent Google Clloud Shell Editor/Terminal](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-google-cloud-shells.png?raw=true)
+![MyAgent Google Clloud Shell Editor/Terminal](https://github.com/lorcie/my-agent/blob/main/assets/my-agent-google-cloud-shell.png?raw=true)
 
 ## Application Deploy on Cloud Run <a name="application-deploy-cloud-run"></a>
 
